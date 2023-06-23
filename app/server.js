@@ -1,4 +1,6 @@
-module.exports= class Application {
+const { indexRouter } = require('./router/router');
+
+module.exports = class Application {
     #express = require('express');
     #app = this.#express()
     constructor(PORT, DB_URL) {
@@ -43,10 +45,18 @@ module.exports= class Application {
         })
     }
     creteRoutes() {
-        this.#app.get('/',(req,res,next)=>{
+        this.#app.get('/', (req, res, next) => {
             return res.json({
-                msg:'this is a new express application'
+                msg: 'this is a new express application'
             })
         })
+        this.#app.use(indexRouter)
+
+        // this.#app.use((err,req, res, next) => {
+        //     try {
+        //     } catch (error) {
+        //         next(error)
+        //     }
+        // })
     }
 }

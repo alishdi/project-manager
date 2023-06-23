@@ -1,15 +1,15 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 
 const userSchema = new Schema({
     first_name: { type: String },
     last_name: { type: String },
     username: { type: String, required: true, unique: true },
     mobile: { type: String, required: true, unique: true, },
-    roles: { type: String, default: ['USER'] },
+    roles: { type: [String], default: ['USER'] },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    skills: { type: String, default: [] },
-    teams: { type: String, default: [] },
+    skills: { type: [String], default: [] },
+    teams: { type: [Types.ObjectId], default: [] },
 },
     {
         timestamps: true
