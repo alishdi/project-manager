@@ -10,6 +10,7 @@ const userSchema = new Schema({
     password: { type: String, required: true },
     skills: { type: [String], default: [] },
     teams: { type: [Types.ObjectId], default: [] },
+    token: { type: String, default: '' },
 },
     {
         timestamps: true

@@ -30,8 +30,24 @@ function registerValidator() {
 
     ]
 }
+function loginvalidator() {
+    return [
+        body('username').notEmpty().withMessage('نام کاربری نمیتواند خالی باشد').custom(username => {
+            const checkUserName = /^[a-z]+[a-z0-9\_\.]{2,}/gi
+            if (checkUserName.test(username)) {
+
+                return true
+            }
+            throw 'نام کاربری صحیح نمیباشد'
+
+        }),
+        body('password').isLength({ min: 6, max: 16 }).withMessage('رمز عبور حداقل 6 و حداکثر 16 کاراکتر باشد')
+
+    ]
+}
 
 
 module.exports = {
-    registerValidator
+    registerValidator,
+    loginvalidator
 }
