@@ -20,3 +20,9 @@ Authorization: Bearer {{$dotenv TOKEN}}
     "password":"123456"
 
 }
+
+
+###getUser request
+http://localhost:3000/user/profile
+Authorization: Bearer {{$dotenv token}}
+
