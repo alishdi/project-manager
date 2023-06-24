@@ -8,6 +8,7 @@ const userSchema = new Schema({
     roles: { type: [String], default: ['USER'] },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+    profile_image: { type: String, required: true },
     skills: { type: [String], default: [] },
     teams: { type: [Types.ObjectId], default: [] },
     token: { type: String, default: '' },

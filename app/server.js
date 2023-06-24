@@ -13,9 +13,9 @@ module.exports = class Application {
 
     configApplication() {
         const path = require('path');
+        this.#app.use(this.#express.static(path.join(__dirname, '..', 'public')));
         this.#app.use(this.#express.json())
         this.#app.use(this.#express.urlencoded({ extended: true }))
-        this.#app.use(this.#express.static(path.join(__dirname, '..', 'public')));
 
     }
     createServer(PORT) {
@@ -38,7 +38,8 @@ module.exports = class Application {
             })
         })
         this.#app.use((error, req, res, next) => {
-            return res.status(error?.status).json({
+            console.log(error);
+            return res.status(error?.status || 500).json({
                 statusCode: error?.status || 500,
                 msg: error?.message || 'Notfound Err'
             })

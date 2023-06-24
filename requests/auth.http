@@ -26,3 +26,16 @@ Authorization: Bearer {{$dotenv TOKEN}}
 http://localhost:3000/user/profile
 Authorization: Bearer {{$dotenv token}}
 
+
+###edit user profile
+post http://localhost:3000/user/edit-profile
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json
+
+
+{
+    "first_name":"ali",
+    "last_name":"shahidi",
+    "skills":["prgramming","node.js","expressj.js"]
+    
+}
