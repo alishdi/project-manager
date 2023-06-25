@@ -1,7 +1,11 @@
+const { projectModel } = require("../../models/project");
+
 class ProjectController {
-    createProject(req, res, next) {
+  async  createProject(req, res, next) {
         try {
             const { title, ext } = req.body;
+            const result=await projectModel.create()
+
         } catch (error) {
             next(error)
         }

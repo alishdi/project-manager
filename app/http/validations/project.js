@@ -8,3 +8,7 @@ function projectValidator() {
 
     
 }
+
+module.exports={
+    projectValidator
+}
