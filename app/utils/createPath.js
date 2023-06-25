@@ -8,7 +8,6 @@ function createPathDirectory() {
     const day = d.getDate() + '';
     const uploadPath = path.join(__dirname, "..", "..", "public", "upload", year, month, day);
     fs.mkdirSync(uploadPath, { recursive: true });
-    console.log(uploadPath);
     return path.join("public", "upload", year, month, day)
 }
 
