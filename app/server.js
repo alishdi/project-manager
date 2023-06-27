@@ -46,18 +46,11 @@ module.exports = class Application {
         })
     }
     creteRoutes() {
+        this.#app.use(indexRouter)
         this.#app.get('/', (req, res, next) => {
             return res.json({
                 msg: 'this is a new express application'
             })
         })
-        this.#app.use(indexRouter)
-
-        // this.#app.use((err,req, res, next) => {
-        //     try {
-        //     } catch (error) {
-        //         next(error)
-        //     }
-        // })
     }
 }

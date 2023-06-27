@@ -1,2 +1,13 @@
 ###create project
+POST http://localhost:3000/project/create 
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json
+
+{
+    "title" : "new title",
+    "text" : "text of newt for prwwwwwwwwwwwwwwwww"
+
+}
+
+
 

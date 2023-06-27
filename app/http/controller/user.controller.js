@@ -42,6 +42,7 @@ class UserController {
     }
     async uploadProfileImage(req, res, next) {
         try {
+            console.log(req.body);
             const userId = req.user._id
             const filePath = req.file?.path?.substring(7)
             const result = await userModel.updateOne({ _id: userId }, { $set: { profile_image: filePath } })
