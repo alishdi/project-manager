@@ -3,11 +3,11 @@ POST  http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "username":"alishahidi2",
-    "email":"alishadi@gmail.com",
-    "mobile":"09129421035",
-    "password":"123456",
-    "confirm_password":"123456"
+    "username":"sajjad",
+    "email":"alishadi12@gmail.com",
+    "mobile":"09195687591",
+    "password":"1234567",
+    "confirm_password":"1234567"
 }
 
 ###login request

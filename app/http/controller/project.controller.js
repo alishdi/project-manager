@@ -4,13 +4,13 @@ const { ProjectModel } = require("../../models/project");
 class ProjectController {
     async createProject(req, res, next) {
         try {
-            const { title, text } = req.body;
-            
+            const { title, text,tags } = req.body;
+            console.log(tags);
             const image = req?.file?.path?.substring(7) 
             console.log(image);
             const owner = req.user._id
 
-            const result = await ProjectModel.create({ title, text, owner,image });
+            const result = await ProjectModel.create({ title, text, owner,image,tags });
             if (!result) throw { status: 400, message: 'افزودن پروژه با مشکل مواجه شد' }
 
             

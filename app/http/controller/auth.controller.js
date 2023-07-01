@@ -5,18 +5,21 @@ const bcrypt = require('bcrypt');
 const { tokenGenerator } = require("../../utils/jwt");
 class AuthController {
     async register(req, res, next) {
+        
         try {
             const { username, password, email, mobile } = req.body
             const hashPass = hashPassword(password)
             const user = await userModel.create({
                 username, email, password: hashPass, mobile
             }).catch(err => {
+                console.log(err);
                 throw { status: 400, message: 'نام کاربری در سامانه موجود میباشد' }
 
             })
             res.send(user)
 
         } catch (error) {
+            
             next(error)
         }
     }

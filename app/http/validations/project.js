@@ -14,7 +14,8 @@ function projectValidator() {
             const maxSize = 2 * 1024 * 1024
             if (req.file.size > maxSize) throw 'حجم فایل نمیتواند بیشتر از 2 مگابایت باشد'
             return true
-        })
+        }),
+        body('tags').isArray({ min: 0, max: 10 }).withMessage('حداکثر 10 هشتک مجاز است')
 
     ]
 
