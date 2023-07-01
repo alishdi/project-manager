@@ -10,4 +10,21 @@ Content-Type: application/json
 }
 
 
+### get All projects
+GET http://localhost:3000/project/list 
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json
+
+### get projects by id
+GET http://localhost:3000/project/649fecb7bca495c6bb49106c
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json
+### remove projects by id
+DELETE  http://localhost:3000/project/remove/649fecb7bca495c6bb49106c
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json
+
+
+
+
 
