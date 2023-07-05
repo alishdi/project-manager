@@ -10,8 +10,13 @@ function createPathDirectory() {
     fs.mkdirSync(uploadPath, { recursive: true });
     return path.join("public", "upload", year, month, day)
 }
+function createLinks(fileAddres, req) {
+    return req.protocol + "://" + req.get('host') + '/' + (fileAddres).replace(/[\\\\]/gm, '/')
+
+}
 
 
 module.exports = {
-    createPathDirectory
+    createPathDirectory,
+    createLinks
 }

@@ -9,10 +9,9 @@ const ProjectSchema = new Schema({
     private: { type: Boolean, default: true },
     tags: { type: [String], default: [] }
 
-},
-    {
-        timestamps: true
-    }
+}, {
+    timestamps: true
+}
 );
 
 const ProjectModel = model('team', ProjectSchema);
