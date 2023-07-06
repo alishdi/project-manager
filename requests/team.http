@@ -1,0 +1,35 @@
+###create team
+POST http://localhost:3000/team/create
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json
+
+{
+    "name":"node js team",
+    "description":"this is a description about this team",
+    "username":"alishaahidi"
+}
+
+
+###get all team
+GET  http://localhost:3000/team/all
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json
+
+
+###get team by id
+GET  http://localhost:3000/team/64a5309382e6a70cbd5046f7
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json
+
+
+###get my team 
+GET  http://localhost:3000/team/me
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json
+
+
+
+###get my team 
+DELETE   http://localhost:3000/team/remove/64a53257be60f4213e43f43c
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json

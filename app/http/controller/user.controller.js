@@ -5,7 +5,7 @@ class UserController {
     getProfile(req, res, next) {
         try {
             const user = req.user
-            console.log(req.user);
+            
             user.profile_image = createLinks(user.profile_image, req)
             return res.status(200).json({
                 status: 200,
@@ -27,7 +27,7 @@ class UserController {
                 if (!fields.includes(key)) delete data[key]
                 if (badValues.includes(value)) delete data[key]
             })
-            console.log(data);
+        
             const result = await userModel.updateOne({ _id: userID }, { $set: data });
             if (result.modifiedCount > 0) {
                 return res.status(200).json({
