@@ -48,3 +48,15 @@ Authorization: Bearer {{$dotenv token}}
 Content-Type: application/json
 
 
+
+###get type req
+get http://localhost:3000/user/requests/accepted
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json
+
+###get type req
+get http://localhost:3000/user/change-status-requests/64a6869610a39e378b001ccd/accepted
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json
+
+

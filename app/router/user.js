@@ -13,6 +13,8 @@ userRouter.post('/edit-profile',checkLogin,UserController.editProfile)
 userRouter.post('/profile-image',uploadMulter.single('image'),checkLogin,imageValidator(),expressValidatorMapper,UserController.uploadProfileImage)
 
 userRouter.get('/requests',checkLogin,UserController.getAllRequests)
+userRouter.get('/requests/:status',checkLogin,UserController.getrequestsByStatus)
+userRouter.get('/change-status-requests/:id/:status',checkLogin,UserController.changeStatus)
 module.exports = {
     userRouter
 }

@@ -4,7 +4,7 @@ const InviteRequests = new Schema({
     teamID: { type: Types.ObjectId, required: true },
     caller: { type: String, required: true, lowercase: true },
     requestDate: { type: Date, default: new Date() },
-    status: { type: String, default: "pending" }
+    status: { type: String}
 
 })
 
@@ -16,11 +16,11 @@ const userSchema = new Schema({
     roles: { type: [String], default: ['USER'] },
     email: { type: String, required: true, unique: true, lowercase: true },
     password: { type: String, required: true },
-    profile_image: { type: String, required: true },
+    profile_image: { type: String },
     skills: { type: [String], default: [] },
     teams: { type: [Types.ObjectId], default: [] },
     token: { type: String, default: '' },
-    inviteRequests: {type: [InviteRequests],maxLength:1 }
+    inviteRequests: { type: [InviteRequests], maxLength: 1 }
 },
     {
         timestamps: true

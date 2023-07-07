@@ -35,6 +35,19 @@ Authorization: Bearer {{$dotenv token}}
 Content-Type: application/json
 
 ###invite user
-get   http://localhost:3000/team/invite/64a5309382e6a70cbd5046f7/alishahidi
+get   http://localhost:3000/team/invite/64a5309382e6a70cbd5046f7/sajjad
 Authorization: Bearer {{$dotenv token}}
 Content-Type: application/json
+
+
+
+###edit team
+PUT  http://localhost:3000/team/update/64a5309382e6a70cbd5046f7
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json
+
+{
+    "name":"ali team A",
+    "description":"node js develop team ali shahidi"
+
+}

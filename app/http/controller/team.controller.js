@@ -59,12 +59,34 @@ class TeamController {
     async getMyTeams(req, res, next) {
         try {
             const userId = req.user._id
-            const teams = await teamModel.find({
-                $or: [
-                    { owner: userId },
-                    { users: userId }
-                ]
-            })
+            const teams = await teamModel.aggregate([
+                {
+                    $match: {
+                        $or: [
+                            { owner: userId },
+                            { users: userId }
+                        ]
+                    }
+                }, {
+                    $lookup: {
+                        from: "users",
+                        localField: "owner",
+                        foreignField: "_id",
+                        as: "owner"
+                    }
+                },{
+                    $project:{
+                        "owner.username":1,
+                        "owner.email":1,
+                        "owner.mobile":1,
+                        "owner._id":1,
+
+                    }
+                },
+                {
+                    $unwind:"$owner"
+                }
+            ])
             return res.status(200).json({
                 status: 200,
                 success: true,
@@ -112,16 +134,30 @@ class TeamController {
                 ],
                 _id: teamID
             })
-           
+
             if (usernvited) throw { status: 400, message: 'کاربر مورد نظر به تیم دعوت شده است' }
+
+            // const { inviteRequests } = await userModel.findById(userID, { inviteRequests: 1 })
+
+
+
             const request = {
                 caller: req.user.username,
                 requestDate: new Date(),
                 teamID,
-                status: "pending"
+                status: "accepted"
             }
+            const searchInUser = await userModel.findOne({ username })
+            // console.log();
+            searchInUser?.inviteRequests?.forEach(user => {
+
+
+                if (user?.caller == req.user.username) throw { status: 400, message: 'این کاربر قبلا از سمت شما دعوت شده است' }
+            })
+
+
             const updateUserResult = await userModel.updateOne({ username }, {
-             
+
                 $push: { inviteRequests: request }
             })
             if (updateUserResult.modifiedCount == 0) throw { status: 500, message: 'درخواست دعوت ثبت نشد' }
@@ -134,8 +170,28 @@ class TeamController {
             next(error)
         }
     }
-    updateTeam() {
+    async updateTeam(req, res, next) {
+        try {
+            const data = { ...req.body };
+            Object.keys(data).forEach(key => {
+                if (!data[key]) delete data[key]
+                if (["", " ", undefined, null, NaN].includes(data[key])) delete data[key]
+            })
+            const { teamID } = req.params
 
+            const userId = req.user._id
+            const team = await teamModel.findOne({ owner: userId, _id: teamID })
+            if (!team) throw { status: 404, message: 'تیمی با این مشخصات یافت نشد' }
+            const updateTeam = await teamModel.updateOne({ _id: teamID }, { $set: data })
+            if (updateTeam.modifiedCount == 0) throw { status: 500, message: 'به رو رسانی انجام نشد' }
+            return res.status(200).json({
+                status: 200,
+                success: true,
+                message: 'به روزرسانی با موفقیت انجام شد'
+            })
+        } catch (error) {
+            next(error)
+        }
     }
     removeUserFromTeam() {
 

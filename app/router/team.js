@@ -11,6 +11,7 @@ teamRouter.post('/create', checkLogin, teamValidation(), expressValidatorMapper,
 teamRouter.get('/all', checkLogin, expressValidatorMapper, TeamController.getListOfTeam)
 teamRouter.get('/me', checkLogin, TeamController.getMyTeams)
 teamRouter.get('/invite/:teamID/:username', checkLogin, TeamController.inviteUserToTeam)
+teamRouter.put('/update/:teamID', checkLogin, TeamController.updateTeam)
 teamRouter.delete('/remove/:id', checkLogin, mongoIDValidator(), expressValidatorMapper, TeamController.removeTeamById)
 teamRouter.get('/:id', checkLogin, mongoIDValidator(), expressValidatorMapper, TeamController.getTeamByID)
 
