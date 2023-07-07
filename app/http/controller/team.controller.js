@@ -1,7 +1,10 @@
-const e = require("express");
+
+
 const { teamModel } = require("../../models/team");
+const { userModel } = require("../../models/user");
 
 class TeamController {
+
     async createTeam(req, res, next) {
         try {
             const { name, description, username } = req.body;
@@ -87,8 +90,49 @@ class TeamController {
             next(error)
         }
     }
-    inviteUserToTeam() {
 
+    async inviteUserToTeam(req, res, next) {
+        try {
+            const userID = req.user._id;
+            const { username, teamID } = req.params;
+            const team = await teamModel.findOne({
+                $or: [
+                    { owner: userID },
+                    { users: userID }
+                ],
+                _id: teamID
+            })
+            if (!team) throw { status: 400, message: "تیمی جهت دعوت کردن یافت نشد" }
+            const user = await userModel.find({ username })
+            if (!user) throw { status: 400, message: 'کاربر مورد نظر جهت دعوت به تیم یافت نشد' };
+            const usernvited = await teamModel.findOne({
+                $or: [
+                    { owner: user[0]._id },
+                    { users: user[0]._id }
+                ],
+                _id: teamID
+            })
+           
+            if (usernvited) throw { status: 400, message: 'کاربر مورد نظر به تیم دعوت شده است' }
+            const request = {
+                caller: req.user.username,
+                requestDate: new Date(),
+                teamID,
+                status: "pending"
+            }
+            const updateUserResult = await userModel.updateOne({ username }, {
+             
+                $push: { inviteRequests: request }
+            })
+            if (updateUserResult.modifiedCount == 0) throw { status: 500, message: 'درخواست دعوت ثبت نشد' }
+            return res.status(200).json({
+                status: 200,
+                message: 'ثبت درخواست با موفقیت ایجاد شد',
+                success: true
+            })
+        } catch (error) {
+            next(error)
+        }
     }
     updateTeam() {
 

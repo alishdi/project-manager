@@ -33,3 +33,8 @@ Content-Type: application/json
 DELETE   http://localhost:3000/team/remove/64a53257be60f4213e43f43c
 Authorization: Bearer {{$dotenv token}}
 Content-Type: application/json
+
+###invite user
+get   http://localhost:3000/team/invite/64a5309382e6a70cbd5046f7/alishahidi
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json

@@ -5,7 +5,7 @@ const TeamSchema = new Schema({
     description: { type: String, required: true },
     username: { type: String, required: true, unique: true },
     users: { type: [Types.ObjectId], default: [] },
-    owner: { type: Types.ObjectId, required: true }
+    owner: { type: Types.ObjectId, required: true ,}
 
 },
     {

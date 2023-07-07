@@ -13,7 +13,7 @@ Content-Type: application/json
 ###login request
 POST  http://localhost:3000/auth/login
 Content-Type: application/json
-Authorization: Bearer {{$dotenv TOKEN}}
+Authorization: Bearer {{$dotenv token}}
 
 {
     "username":"alishahidi2",
@@ -39,3 +39,12 @@ Content-Type: application/json
     "skills":["prgramming","node.js","expressj.js"]
     
 }
+
+
+
+###get all req
+get http://localhost:3000/user/requests
+Authorization: Bearer {{$dotenv token}}
+Content-Type: application/json
+
+

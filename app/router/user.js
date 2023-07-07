@@ -12,6 +12,7 @@ userRouter.get('/profile',checkLogin,UserController.getProfile)
 userRouter.post('/edit-profile',checkLogin,UserController.editProfile)
 userRouter.post('/profile-image',uploadMulter.single('image'),checkLogin,imageValidator(),expressValidatorMapper,UserController.uploadProfileImage)
 
+userRouter.get('/requests',checkLogin,UserController.getAllRequests)
 module.exports = {
     userRouter
 }
